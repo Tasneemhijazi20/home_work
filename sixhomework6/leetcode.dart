@@ -7,25 +7,39 @@ void main() {
 }
 
 bool isPalindrome(String s) {
-  s = s.toLowerCase();
-  var str = s.split('');
-  List<String> finalList = [];
-  str.forEach((String item) {
-    if (isLetterOrDigit(item)) {
-      finalList.add(item);
+  String formattedString =
+      s.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '').toLowerCase();
+  int start = 0;
+  int end = formattedString.length - 1;
+  while (start <= end) {
+    if (formattedString[start] != formattedString[end]) {
+      return false;
     }
-  });
-  String finalString = finalList.join();
-  String reverseString = finalList.reversed.join();
-  if (finalString == reverseString || finalList.length == 0) {
-    return true;
-  } else {
-    return false;
+    start++;
+    end--;
   }
+  return true;
 }
+// bool isPalindrome(String s) {
+//   s = s.toLowerCase();
+//   var str = s.split('');
+//   List<String> finalList = [];
+//   str.forEach((String item) {
+//     if (isLetterOrDigit(item)) {
+//       finalList.add(item);
+//     }
+//   });
+//   String finalString = finalList.join();
+//   String reverseString = finalList.reversed.join();
+//   if (finalString == reverseString || finalList.length == 0) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
-bool isLetterOrDigit(String c) {
-  const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  const digits = '0123456789';
-  return letters.contains(c) || digits.contains(c);
-}
+// bool isLetterOrDigit(String c) {
+//   const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//   const digits = '0123456789';
+//   return letters.contains(c) || digits.contains(c);
+// }
