@@ -10,7 +10,7 @@ void main() {
     numbers.add(n);
   }
   int largest = numbers[0];
-  int secondLargest = -1;
+  int secondLargest = numbers[0];
   for (int i = 1; i < numbers.length; i++) {
     int item = numbers[i];
     if (item > largest) {
