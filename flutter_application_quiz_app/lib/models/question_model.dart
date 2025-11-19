@@ -4,6 +4,7 @@ class QuestionModel {
   String? correctAnswer;
   bool isMultipleChoice;
   String selectedOption;
+  List<String>? selectedOptions = [];
   String image;
   QuestionModel({
     required this.options,
@@ -12,5 +13,6 @@ class QuestionModel {
     this.correctAnswer,
     required this.isMultipleChoice,
     this.selectedOption = '',
+    this.selectedOptions,
   });
 }

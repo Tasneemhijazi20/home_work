@@ -20,7 +20,6 @@ class OptionsList extends StatefulWidget {
 class _OptionsListState extends State<OptionsList>
     with AutomaticKeepAliveClientMixin {
   int selectedIndex = -1;
-
   bool isMultiOptions = false;
   @override
   Widget build(BuildContext context) {
@@ -32,22 +31,27 @@ class _OptionsListState extends State<OptionsList>
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
+              widget.quizController.update(
+                widget.questionModel,
+                widget.questionModel.options[index],
+              );
               if (!widget.questionModel.isMultipleChoice) {
                 selectedIndex = index;
 
-                widget.quizController.update(
-                  widget.questionModel,
-                  widget.questionModel.options[index],
-                );
                 setState(() {});
               } else {
                 isMultiOptions = widget.questionModel.isMultipleChoice;
+
                 setState(() {});
               }
             },
             child: OptionItem(
               isMultiOptions: isMultiOptions,
-              isSelected: selectedIndex == index,
+              isSelected: widget.questionModel.isMultipleChoice
+                  ? widget.questionModel.selectedOptions!.contains(
+                      widget.questionModel.options[index],
+                    )
+                  : selectedIndex == index,
               data: widget.questionModel.options[index],
             ),
           );

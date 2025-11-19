@@ -26,6 +26,7 @@ class QuizController {
       options: ['Vitamin A', 'Vitamin C', 'Vitamin D', ' Vitamin K'],
       title: "Which of the following are fat-soluble vitamins?",
       isMultipleChoice: true,
+      selectedOptions: [],
     ),
     QuestionModel(
       image: Assets.que4,
@@ -67,6 +68,14 @@ class QuizController {
 
   double get result => _result;
   void update(QuestionModel question, String answer) {
-    question.selectedOption = answer;
+    if (question.isMultipleChoice) {
+      if (question.selectedOptions!.contains(answer)) {
+        question.selectedOptions!.remove(answer);
+      } else {
+        question.selectedOptions!.add(answer);
+      }
+    } else {
+      question.selectedOption = answer;
+    }
   }
 }

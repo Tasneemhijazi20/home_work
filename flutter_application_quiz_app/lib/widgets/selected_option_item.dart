@@ -28,7 +28,7 @@ class SelectedOptionItem extends StatelessWidget {
                   backgroundColor: AppColor.primaryColor,
                   child: CircleAvatar(
                     radius: 9,
-                    backgroundColor: AppColor.secondaryColor,
+                    backgroundColor: Color(0xffB8B2FF),
                     child: SvgPicture.asset(Assets.checkIcon),
                   ),
                 )
