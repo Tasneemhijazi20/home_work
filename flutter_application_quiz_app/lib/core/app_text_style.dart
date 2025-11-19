@@ -1,20 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_quiz_app/core/app_color.dart';
 
-class AppTextStyle {
-  static const TextStyle primaryText = TextStyle(
-    fontSize: 24,
-    overflow: TextOverflow.visible,
-    color: Colors.white,
-  );
-  static const TextStyle secondaryText = TextStyle(
-    fontSize: 18,
-    color: AppColor.primaryColor,
-  );
-  static const TextStyle buttonText = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    color: Colors.white,
-  );
+abstract class AppTextStyle {
+  static TextStyle regular24({Color? color}) {
+    return TextStyle(
+      fontSize: 24,
+      overflow: TextOverflow.visible,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Gilroy',
+    );
+  }
+
+  static TextStyle medium24({Color? color}) {
+    return TextStyle(
+      fontSize: 24,
+      overflow: TextOverflow.visible,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Gilroy',
+    );
+  }
+
+  static TextStyle regular18({Color? color}) {
+    return TextStyle(
+      fontSize: 18,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Gilroy',
+    );
+  }
+
+  static TextStyle medium18({Color? color}) {
+    return TextStyle(
+      fontSize: 18,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Gilroy',
+    );
+  }
+
+  static TextStyle medium16({Color? color}) {
+    return TextStyle(
+      fontSize: 16,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Gilroy',
+    );
+  }
+
+  static TextStyle regular16({Color? color}) {
+    return TextStyle(
+      fontSize: 16,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Gilroy',
+    );
+  }
+
+  static TextStyle regular12({Color? color}) {
+    return TextStyle(
+      fontSize: 12,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Gilroy',
+    );
+  }
+
+  static TextStyle medium12({Color? color}) {
+    return TextStyle(
+      fontSize: 12,
+      color: color == null ? Colors.white : color,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Gilroy',
+    );
+  }
 }

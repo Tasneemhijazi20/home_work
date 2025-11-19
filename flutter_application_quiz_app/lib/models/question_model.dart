@@ -1,14 +1,16 @@
 class QuestionModel {
-  String question;
+  String title;
   List<String> options;
   String? correctAnswer;
   bool isMultipleChoice;
-  bool isSelected;
+  String selectedOption;
+  String image;
   QuestionModel({
-    this.isSelected = false,
     required this.options,
-    required this.question,
+    required this.image,
+    required this.title,
     this.correctAnswer,
     required this.isMultipleChoice,
+    this.selectedOption = '',
   });
 }

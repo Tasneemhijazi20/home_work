@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_quiz_app/core/app_color.dart';
+import 'package:flutter_application_quiz_app/core/app_assets.dart';
+import 'package:flutter_application_quiz_app/core/app_decoration.dart';
 import 'package:flutter_application_quiz_app/models/quiz_controller.dart';
-import 'package:flutter_application_quiz_app/screens/result_screen.dart';
 import 'package:flutter_application_quiz_app/widgets/next_back_section.dart';
 import 'package:flutter_application_quiz_app/widgets/question_widget.dart';
 
@@ -14,50 +14,61 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   QuizController quizController = QuizController();
-  String value = '';
+  PageController pageController = PageController();
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.primaryColor,
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.only(top: 40, bottom: 22, left: 10, right: 10),
-          child: Column(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: AppDecoration.homeDecoration,
+        child: SafeArea(
+          child: Stack(
             children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    QuestionWidget(
-                      selectedValue: value,
-                      quizController: quizController,
-                      questionModel: quizController
-                          .questions[quizController.questionindex],
-                    ),
-                  ],
-                ),
+              Positioned.fill(
+                child: Image.asset(Assets.quizGradinte, fit: BoxFit.fill),
               ),
-              const SizedBox(height: 16),
-              NextBackSection(
-                nextquestion: () {
-                  if (quizController.questionindex <
-                      quizController.questions.length) {
-                    quizController.questionindex++;
-                  } else {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return ResultScreen(result: 0);
-                        },
-                      ),
-                    );
-                  }
-                },
-                backquestion: () {
-                  if (quizController.questionindex > 0) {
-                    quizController.questionindex--;
-                  }
-                },
+              Column(
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      onPageChanged: (index) {
+                        quizController.questionindex = index;
+                        setState(() {});
+                      },
+                      controller: pageController,
+                      itemCount: quizController.questions.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsetsGeometry.only(
+                            top: 45,
+                            left: 10,
+                            right: 10,
+                          ),
+                          child: QuestionWidget(
+                            questionModel: quizController.questions[index],
+                            quizController: quizController,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: NextBackSection(
+                      pageController: pageController,
+                      quizController: quizController,
+                    ),
+                  ),
+                  const SizedBox(height: 45),
+                ],
               ),
             ],
           ),

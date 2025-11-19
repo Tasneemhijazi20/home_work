@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_quiz_app/core/app_color.dart';
+import 'package:flutter_application_quiz_app/core/app_text_style.dart';
 
 class CustomContainer extends StatelessWidget {
-  const CustomContainer({
-    required this.child,
-    required this.onTap,
-    required this.color,
-  });
+  const CustomContainer({required this.text, required this.onTap});
   final VoidCallback onTap;
-  final Widget child;
-  final Color color;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +17,12 @@ class CustomContainer extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: color,
+          color: Colors.white,
         ),
-        child: child,
+        child: Text(
+          text,
+          style: AppTextStyle.regular18(color: AppColor.primaryColor),
+        ),
       ),
     );
   }
